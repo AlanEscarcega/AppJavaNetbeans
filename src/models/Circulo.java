@@ -2,14 +2,14 @@ package models;
 
 import processing.core.PApplet;
 
-public class Caja {
+public class Circulo {
 
     private Posicion posicion;
     private Dimension dimension;
     private Borde borde;
     private int color;
 
-    public Caja(){
+    public Circulo(){
         this.posicion = new Posicion();
         this.dimension = new Dimension();
         this.borde = new Borde();
@@ -30,7 +30,10 @@ public class Caja {
         p.fill(this.color); // fill primero para que el color de relleno funcione
         p.stroke(borde.getColor());
         p.strokeWeight(borde.getAncho());
-        p.rect(posicion.getX(), posicion.getY(), dimension.getHorizontal(), dimension.getVertical());
+        float x = posicion.getX();
+        float y = posicion.getY();
+        float w = dimension.getHorizontal();
+        float h = dimension.getVertical();
+        p.ellipse(x, y, w, h);
     }
 }
-

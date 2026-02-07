@@ -1,48 +1,60 @@
 package nuevopoo;
 
-import models.Borde;
 import processing.core.PApplet;
+import models.Caja;
+import models.Circulo;
+import java.util.ArrayList;
 
 public class NuevoPoo extends PApplet {
-    
-    Borde borde;
-    
+
+    ArrayList<Caja> cajas = new ArrayList<>();
+    ArrayList<Circulo> circulos = new ArrayList<>();
+    String tipoFigura = "caja";
+    int colorActual = color(255,0,0);
+
     public static void main(String[] args) {
         PApplet.main("nuevopoo.NuevoPoo");
     }
 
     @Override
     public void settings() {
-        //Definir tamano de ventana
-        size(Config.ANCHO, Config.ALTO);
-    }
-
-    @Override
-    public void setup() {
-        // Configuración inicial
-        background(Config.COLOR_FONDO);
-        borde = new Borde(6, 0);
+        size(600, 600);
     }
 
     @Override
     public void draw() {
-        //borde.ancho = 6;
-        //borde.setAncho(100);
-        //borde.color = 0;
-        //borde.setColor(0);
-        // colores pueden ser texto, rgb, escala de grises
-        // texto: "green"
-        // rgb (100,100,100)
-        // escala de grises: 0 -255 (0 negro, 255 blanco)
+        background(255);
+        for(Caja c : cajas) c.dibujar(this);
+        for(Circulo cir : circulos) cir.dibujar(this);
+    }
 
-        // color del borde
-        stroke(borde.getColor());
-        // ancho del borde
-        strokeWeight(borde.getAncho());
-        // color de relleno
-        fill(150);
+    @Override
+    public void mousePressed() {
+        if(tipoFigura.equals("caja")) {
+            Caja c = new Caja();
+            c.getPosicion().setX(mouseX);
+            c.getPosicion().setY(mouseY);
+            c.getDimension().setHorizontal(80);
+            c.getDimension().setVertical(80);
+            c.setColor(colorActual);
+            cajas.add(c);
+        } else {
+            Circulo cir = new Circulo();
+            cir.getPosicion().setX(mouseX);
+            cir.getPosicion().setY(mouseY);
+            cir.getDimension().setHorizontal(80);
+            cir.getDimension().setVertical(80);
+            cir.setColor(colorActual);
+            circulos.add(cir);
+        }
+    }
 
-        // dibuja un rectángulo
-        rect(0, 0, 100, 100);
+    @Override
+    public void keyPressed() {
+        if(key == 'a' || key == 'A') tipoFigura = "caja";
+        if(key == 'b' || key == 'B') tipoFigura = "circulo";
+        if(key == '1') colorActual = color(255,0,0);
+        if(key == '2') colorActual = color(0,0,255);
+        if(key == '3') colorActual = color(0,255,0);
     }
 }

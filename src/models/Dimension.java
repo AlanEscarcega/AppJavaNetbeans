@@ -5,12 +5,12 @@ public class Dimension {
     private int horizontal;
     
     public Dimension(){
-        this(0,0);
+        this(80,80);
     }
     
     public Dimension(int w, int h){
-        this.vertical = h;
         this.horizontal = w;
+        this.vertical = h;
     }
     
     public int getVertical(){
@@ -20,4 +20,13 @@ public class Dimension {
     public int getHorizontal(){
         return horizontal;
     }
+
+    public void setHorizontal(int h){
+        this.horizontal = h;
+    }
+
+    public void setVertical(int v){
+        this.vertical = v;
+    }
 }
+
